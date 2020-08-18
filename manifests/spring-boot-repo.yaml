@@ -1,0 +1,10 @@
+apiVersion: tekton.dev/v1alpha1
+kind: PipelineResource
+metadata:
+  name: spring-boot-github
+  namespace: tkn-demo
+spec:
+  params:
+  - name: url
+    value: https://github.com/sqtran/spring-boot.git
+  type: git

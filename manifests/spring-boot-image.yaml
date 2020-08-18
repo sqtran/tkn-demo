@@ -1,0 +1,10 @@
+apiVersion: tekton.dev/v1alpha1
+kind: PipelineResource
+metadata:
+  name: spring-boot-image
+  namespace: tkn-demo
+spec:
+  params:
+  - name: url
+    value: image-registry.openshift-image-registry.svc:5000/tkn-demo/spring-boot:latest
+  type: image

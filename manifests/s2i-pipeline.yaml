@@ -1,0 +1,31 @@
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: s2i-pipeline
+  namespace: tkn-demo
+spec:
+  resources:
+    - name: git-repo
+      type: git
+    - name: image
+      type: image
+  tasks:
+    - name: s2i-java-8
+      params:
+        - name: PATH_CONTEXT
+          value: .
+        - name: TLSVERIFY
+          value: 'false'
+        - name: MAVEN_CLEAR_REPO
+          value: 'false'
+      resources:
+        inputs:
+          - name: source
+            resource: git-repo
+        outputs:
+          - name: image
+            resource: image
+      taskRef:
+        kind: ClusterTask
+        name: s2i-java-8
+
